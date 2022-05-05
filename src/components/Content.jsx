@@ -12,15 +12,18 @@ const Wrapper = styled.main`
   /* padding-left: 378px; */
 `;
 
-export const Content = ({ timeline }) => {
-  const [timepoints, setTimepoints] = useState(timeline.timepoints);
-
+export const Content = ({ timeline, setTimeline }) => {
+  const { timepoints } = timeline;
   return (
     <Wrapper>
       {timepoints?.map((timepoint) => (
         <TimePoint key={timepoint.id} {...timepoint} />
       ))}
-      <AddTimePoint setTimepoints={setTimepoints} timepoints={timepoints} />
+      <AddTimePoint
+        timeline={timeline}
+        setTimeline={setTimeline}
+        timepoints={timepoints}
+      />
     </Wrapper>
   );
 };

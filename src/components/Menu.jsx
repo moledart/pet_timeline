@@ -34,15 +34,20 @@ const TimelineTitle = styled.input`
   }
 `;
 
-export const Menu = () => {
-  const [timelineTitle, setTimelineTitle] = useState('');
+export const Menu = ({ timeline, setTimeline }) => {
+  const { title } = timeline;
 
   return (
     <Aside>
       <TimelineTitle
         type="text"
-        value={timelineTitle}
-        onChange={(e) => setTimelineTitle(e.target.value)}
+        value={title}
+        onChange={(e) =>
+          setTimeline({
+            ...timeline,
+            title: e.target.value,
+          })
+        }
         placeholder="Name your timeline"
       />
     </Aside>

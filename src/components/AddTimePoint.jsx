@@ -1,6 +1,7 @@
-import React, { useId } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { v4 as uuidv4 } from 'uuid';
 
 const TimePointSection = styled.div`
   display: grid;
@@ -32,19 +33,23 @@ const AddCard = styled.div`
   }
 `;
 
-export const AddTimePoint = ({ timepoints, setTimePoints }) => {
-  const timepointId = useId();
+export const AddTimePoint = ({ timepoints, timeline, setTimeline }) => {
   const handleAddTimePoint = () => {
-    setTimePoints([
-      ...timepoints,
-      {
-        id: timepointId,
-        title: '',
-        description: '',
-        image: [],
-        date: '',
-      },
-    ]);
+    setTimeline({
+      ...timeline,
+      timepoints: [
+        ...timepoints,
+        {
+          id: uuidv4(),
+          title: 'This is a new timpoint',
+          description: 'Click on the edit button to start adding information',
+          image: [
+            'https://images.unsplash.com/photo-1651610925384-687152fdd8d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+          ],
+          date: 'Woah new event',
+        },
+      ],
+    });
   };
 
   return (
