@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&family=Oswald:wght@300;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+  overflow-x: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --colors-bg: hsl(41, 32%, 76%);
+  --colors-bg-primary: hsl(11, 50%, 60%);
+  --colors-black: hsl(0, 25%, 2%);
+
+  --fs-big: 2rem;
+  --fs-medium: 1.5rem;
+  --fs-basic: 1rem;
+  --fs-small: 0.75rem;
+
+  --shadow: #b9ac8e 3px 3px 6px 0px inset, #dfceaa -3px -3px 6px 1px inset;
+}
