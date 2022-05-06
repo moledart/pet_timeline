@@ -26,4 +26,6 @@ body::-webkit-scrollbar {
   --fs-small: 0.75rem;
 
   --shadow: #b9ac8e 3px 3px 6px 0px inset, #dfceaa -3px -3px 6px 1px inset;
+  --shadow-primary: hsl(11, 31%, 51%) 3px 3px 6px 0px inset,
+    hsl(11, 31%, 51%) -3px -3px 6px 1px inset;
 }

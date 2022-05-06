@@ -10,6 +10,7 @@ const Wrapper = styled.main`
   height: 100%;
   justify-content: flex-start;
   /* padding-left: 378px; */
+  /* margin-left: 384px; */
 `;
 
 export const Content = ({ timeline, setTimeline }) => {
@@ -17,7 +18,12 @@ export const Content = ({ timeline, setTimeline }) => {
   return (
     <Wrapper>
       {timepoints?.map((timepoint) => (
-        <TimePoint key={timepoint.id} {...timepoint} />
+        <TimePoint
+          key={timepoint.id}
+          timepoint={timepoint}
+          timeline={timeline}
+          setTimeline={setTimeline}
+        />
       ))}
       <AddTimePoint
         timeline={timeline}

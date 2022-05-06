@@ -10,13 +10,16 @@ const Container = styled.div`
   grid-template-columns: 384px 1fr;
   background-color: var(--colors-bg);
   height: 100vh;
-  min-width: 100%;
-  width: max-content;
+  min-width: max-content;
+  position: relative;
 `;
 
 function App() {
   const [timeline, setTimeline] = useState({
-    title: 'Timeline.io',
+    title: 'History of the project',
+    period: '1903-1925',
+    description:
+      'This is just a filler text but you can give a brief information about this timeline here. Just a few words so that visitors understand whats going on. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     timepoints: [
       {
         id: uuidv4(),

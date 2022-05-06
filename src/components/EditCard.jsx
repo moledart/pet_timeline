@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineSave, AiOutlineDelete } from 'react-icons/ai';
-
-const TimePointSection = styled.div`
-  display: grid;
-  grid-row: 1 / 3;
-  grid-template-rows: 1fr 2px 1fr;
-  width: 420px;
-
-  &:nth-child(odd) > .card {
-    grid-row: 3 / 4;
-  }
-`;
+import { useHeight } from './hooks';
 
 const Card = styled.div`
   display: flex;
@@ -59,31 +49,6 @@ const Card = styled.div`
       outline: none;
       box-shadow: var(--shadow);
     }
-  }
-`;
-
-const Line = styled.div`
-  grid-row: 2 / 3;
-  background-color: var(--colors-black);
-  display: flex;
-  height: 10%;
-  min-height: 2px;
-  width: 100%;
-  align-self: center;
-  position: relative;
-  overflow: visible;
-  z-index: 10;
-
-  &::after {
-    content: '';
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    top: 50%; /* position the top  edge of the element at the middle of the parent */
-    left: 32px; /* position the left edge of the element at the middle of the parent */
-    transform: translateY(-50%);
-    border-radius: 50%;
-    background-color: var(--colors-black);
   }
 `;
 
@@ -139,23 +104,29 @@ const Action = styled.div`
 `;
 
 export const EditTimePointCard = ({
-  timepointData,
-  setTimepointData,
+  timepoint,
+  timeline,
+  setTimeline,
   setEdit,
+  handleDeleteTimepoint,
 }) => {
-  const { date, title, description, image } = timepointData;
-  const [textareaheight, setTextareaheight] = useState(2);
+  const { id, date, title, description, image } = timepoint;
+  const [textareaheight, handleHeight] = useHeight();
 
   const handleChange = (e) => {
-    const maxRows = 10;
-    const height = e.target.scrollHeight;
-    const rowHeight = 18;
-    const trows = Math.ceil(height / rowHeight) - 1;
-    if (trows > textareaheight && trows < maxRows) {
-      setTextareaheight(trows);
-    }
+    handleHeight(e);
+
     const { name, value } = e.target;
-    setTimepointData({ ...timepointData, [name]: value });
+
+    const newTimePoints = timeline.timepoints.map((item) => {
+      if (item.id !== id) return item;
+      return { ...item, [name]: value };
+    });
+
+    setTimeline({
+      ...timeline,
+      timepoints: [...newTimePoints],
+    });
   };
 
   return (
@@ -165,34 +136,32 @@ export const EditTimePointCard = ({
           <span>Save changes</span>
           <AiOutlineSave size={'20px'} />
         </Action>
-        <Action>
+        <Action onClick={() => handleDeleteTimepoint(id)}>
           <span style={{ color: '#a01818' }}>Delete</span>
           <AiOutlineDelete size={'20px'} color={'#a01818'} />
         </Action>
       </ActionWrapper>
       <>
         <Date
-          value={timepointData.date}
+          value={date}
           placeholder="Date"
           name="date"
           onChange={handleChange}
         />
         <Title
           placeholder="Timepoint..."
-          value={timepointData.title}
+          value={title}
           name="title"
           onChange={handleChange}
         />
         <Description
           placeholder="Tell about the event"
-          value={timepointData.description}
+          value={description}
           name="description"
           onChange={handleChange}
           rows={textareaheight}
         />
-        <ImageGallery>
-          {/* <Image src={timepointData.image[0]} /> */}
-        </ImageGallery>
+        <ImageGallery>{/* <Image src={image[0]} /> */}</ImageGallery>
       </>
     </Card>
   );

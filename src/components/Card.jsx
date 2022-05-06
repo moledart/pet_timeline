@@ -83,8 +83,12 @@ const Action = styled.div`
   }
 `;
 
-export const TimePointCard = ({ timepointData, setEdit }) => {
-  const { date, title, description, image } = timepointData;
+export const TimePointCard = ({
+  timepoint,
+  setEdit,
+  handleDeleteTimepoint,
+}) => {
+  const { id, date, title, description, image } = timepoint;
 
   return (
     <Card className="card">
@@ -93,7 +97,7 @@ export const TimePointCard = ({ timepointData, setEdit }) => {
           <span>Edit</span>
           <AiOutlineEdit size={'20px'} />
         </Action>
-        <Action>
+        <Action onClick={() => handleDeleteTimepoint(id)}>
           <span style={{ color: '#a01818' }}>Delete</span>
           <AiOutlineDelete size={'20px'} color={'#a01818'} />
         </Action>
